@@ -5,6 +5,10 @@ import (
 	"time"
 )
 
+func UnixString()(string){
+
+	return UnixStr();
+}
 func UnixStr()(string){
 	t := time.Now()
 	return strconv.FormatInt(t.UTC().UnixNano(), 10)[:10]

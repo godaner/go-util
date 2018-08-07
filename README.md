@@ -1,2 +1,2 @@
 # go-util
-go-util是一个golang语言的工具集合。
+    go-util是一个golang的工具集合。
