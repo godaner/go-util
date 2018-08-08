@@ -1,28 +1,11 @@
 package randomutil
 
 import (
-	"math/rand"
-	"fmt"
-	"sync"
 	"github.com/bwmarrin/snowflake"
+	"fmt"
 )
-var (
-	node *snowflake.Node
-	once sync.Once
-)
-func RandomString(l int) string {
-	bytes := make([]byte, l)
-	for i := 0; i < l; i++ {
-		bytes[i] = byte(RandInt(65, 90))
-	}
-	return string(bytes)
-}
-func RandInt(min int, max int) int {
-	return min + rand.Intn(max-min)
-}
 
-
-//获取db  id int64
+//diff randomId will produce never same snow flake id
 func GetSnowFlakeId(randomId int64) int64 {
 	once.Do(func() {
 		getSnowFlake(randomId)
