@@ -2,15 +2,11 @@ package encryptutil
 
 import (
 	"crypto/md5"
-	"strings"
-	"encoding/hex"
+	"fmt"
 )
 
-func Check(content, encrypted string) bool {
-	return strings.EqualFold(Encode(content), encrypted)
-}
-func EncodeMd5(data string) string {
+func EncryptMd5(s string) string {
 	h := md5.New()
-	h.Write([]byte(data))
-	return hex.EncodeToString(h.Sum(nil))
+	h.Write([]byte(s))
+	return fmt.Sprintf("%x", h.Sum(nil))
 }
