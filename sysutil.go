@@ -1,11 +1,9 @@
-package sysutil
+package go_util
 
 import (
 	"os/exec"
 	"bytes"
 	"time"
-	"go-util/stringutil"
-	"go-util/logutil"
 )
 
 func CmdOut(name string, arg ...string) (string, error) {
@@ -30,7 +28,7 @@ func CmdOutNoLn(name string, arg ...string) (out string, err error) {
 		return
 	}
 
-	return stringutil.TrimRightSpace(string(out)), nil
+	return TrimRightSpace(string(out)), nil
 }
 
 func CmdRunWithTimeout(cmd *exec.Cmd, timeout time.Duration) (error, bool) {
@@ -44,12 +42,12 @@ func CmdRunWithTimeout(cmd *exec.Cmd, timeout time.Duration) (error, bool) {
 	case <-time.After(timeout):
 		//timeout
 		if err = cmd.Process.Kill(); err != nil {
-			logutil.Error("failed to kill: %s, error: %s", cmd.Path, err)
+			Error("failed to kill: %s, error: %s", cmd.Path, err)
 		}
 		go func() {
 			<-done // allow goroutine to exit
 		}()
-		logutil.Info("process:%s killed", cmd.Path)
+		Info("process:%s killed", cmd.Path)
 		return err, true
 	case err = <-done:
 		return err, false

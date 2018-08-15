@@ -1,4 +1,4 @@
-package logutil
+package go_util
 
 import (
 	"fmt"
