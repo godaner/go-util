@@ -6,21 +6,21 @@ import (
 )
 
 //diff randomId will produce never same snow flake id
-func GetSnowFlakeId(randomId int64) int64 {
+func GetSnowFlakeId() int64 {
 	once.Do(func() {
-		getSnowFlake(randomId)
+		getSnowFlake()
 	})
 	id := node.Generate()
 	return id.Int64()
 }
 
-func GetSnowFlakeIdStr(uniqueId int64) string {
+func GetSnowFlakeIdStr() string {
 
-	return fmt.Sprintf("%d", GetSnowFlakeId(uniqueId))
+	return fmt.Sprintf("%d", GetSnowFlakeId())
 }
 
-func getSnowFlake(uniqueId int64) {
-	node1, err := snowflake.NewNode(int64(uniqueId))
+func getSnowFlake() {
+	node1, err := snowflake.NewNode(NewUUID().Int64())
 	if err != nil {
 		fmt.Println(err)
 		return
